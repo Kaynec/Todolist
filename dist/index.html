@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="./style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todo List</title>
 </head>
 <body>
+
+    <div id="addedit">
+    <button id="addproject">Add Project</button>
+    <button id="editproject">Remove Project</button>
+    </div>
+
+
+    <div id="container">
+
+        <div class="pdisplay">
+                
+                <label for="for-select">Projects</label>
+                <select name="select" id="for-select">
+                </select>
+        </div>
+
+            <button id="addtodo">Add A Task</button>
+
+            <div id="todolistHolder">
+            </div> 
+
+
+            </div>
+    </div>
+
+    <div class="form">
+        <div>
+            <button class="X">X</button>
+        </div>
+        <div>
+            <label for="name">
+            Name Of Your Project <br>
+            <input type="text" class="TEXT" value="">
+            </label>
+            <button class="ADD">ADD</button>
+        </div>
+    </div>
     <script src="./main.js"></script>
 </body>
 </html>
