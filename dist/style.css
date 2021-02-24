@@ -1,3 +1,9 @@
+:root {
+    --select-border: #777;
+    --select-focus: blue;
+    --select-arrow: var(--select-border);
+  }
+
 h1,h2,p,h3,span{
     margin: 0;
     padding: 0;
@@ -8,12 +14,12 @@ h1,h2,p,h3,span{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
-background-color: #7FDBFF;   
+    background: #36486b;
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 #main {
     flex: 1;
-    background: #39CCCC;
+    background: #618685;
     margin: auto auto;
     width:min(80%,80%);
     max-height: 60%;
@@ -21,7 +27,7 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubun
 }
 .pdisplay {
     display: flex;
-    background: aqua;
+    background: #9fd3dd;
     height: auto;
     align-items: center;
     justify-content: center;
@@ -31,7 +37,7 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubun
 }
 #addedit button {
 border-radius: 8%;
-background: darkblue;
+background: #a7c5eb;
 color: white;
 font-weight: bolder;
 margin: 0.5em;
@@ -45,22 +51,28 @@ padding: 0.5rem 0.75rem;
     padding:0.75em 0;
 }
 #for-select {
-    background: aquamarine;
-     width: auto;
-    padding: .5em 1em;
-    border-radius: 5px;
-    color: purple;
-    font-size: 15px; 
+-webkit-appearance: none;
+font-size: 20px;
+font-weight: 300; 
+text-align: center;
+min-width: 15ch;
+cursor: pointer;
+line-height: 1.1;
+background: #0c0546;
+appearance: none;
+padding:0.3rem 0.5rem;
+margin-left: 0.7em;
+color: white;
 }
-
 #container {
     margin-top: 100px;
     margin-inline: auto;
-    background: #39CCCC;
+    background: #8ac4d0;
     width: 80%;
     min-height: 80%;
 }
 .innerdiv {
+    position: relative;
     display: flex;
     flex-direction: row;
     padding: 0.75em;
@@ -91,7 +103,7 @@ padding: 0.5rem 0.75rem;
 }
 #paraeditdone button {
     height: 3em;
-    background:darkblue;
+    background:#4a47a3;
     color: white;
     border-radius: 5px;
     padding:0.5em 1.2em;
@@ -182,8 +194,20 @@ border-radius: 15px;
 .todoform div button{
     background: #7FDBFF;
     color:white;
-
 }
 .todoform div >:first-of-type{
     margin-right:0.5em ;
+}
+
+.after {
+    background: #CDCDCD;
+}
+.after #namedate span {
+    color: white;
+}
+.normal {
+    background: rgb(165, 194, 231);
+}
+.important {
+    background: #91091e;
 }

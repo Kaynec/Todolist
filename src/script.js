@@ -3,22 +3,23 @@ export {makeTodo}
 export {MyObject}
 
 function makeProject(title){
-        return {title}
+        let todo=[]
+        return {title,todo}
 }
 function makeTodo(title,date,description,done,priority){
     done=false
     function toggleDone(){
         if (done){
-            done==false
-        }else if (done==false){
-            done==true
+            return done===false
+        }else if (done===false){
+            return done===true
         }
     }
     function togglePriority(){
-        if (priority=='Normal'){
-            priority=='important'
+        if (priority==='Normal'){
+            priority==='important'
         }else if (priority=='important'){
-            priority=='Normal'
+            priority==='Normal'
         }
     }
     return {title,date,description,done,priority,togglePriority,toggleDone}
@@ -27,14 +28,7 @@ function makeTodo(title,date,description,done,priority){
 var MyObject = function() {
     let projectsArray=[];
     projectsArray.push(makeProject('default'))
-    function addTodotoProject(){
-        projectsArray.forEach(item=>{
-            item.todo=[]
-        } )
-    }
-    addTodotoProject()
     return {
         projectsArray
     }
 }();
-

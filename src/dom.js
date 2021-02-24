@@ -4,14 +4,18 @@ import {MyObject} from './script'
 export {buttonEvents}
 // The Main Module That Manages The Dom Section
 let buttonEvents=function(){
+// date of today
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = mm + '/' + dd + '/' + yyyy;
 // Cache Dom
 let container=document.getElementById('todolistHolder')
 let body = document.querySelector('body')
 let select = document.getElementById('for-select')
 let form = document.querySelector('.form');
 let addproject =document.getElementById('addproject')
-let closeProject=document.querySelector('.X')
-let ADD=document.querySelector('.ADD')
 let text=document.querySelector('.TEXT')
 // Initial Loop Through Array
 loopthroughProject(MyObject.projectsArray)
@@ -25,10 +29,10 @@ form.addEventListener('click',(e)=>{
         form.style.display='none'
     }else if (e.target.className=='ADD'){
         var push = makeProject(text.value)
-        push.todo=[]
         MyObject.projectsArray.push(push)
         loopthroughProject(MyObject.projectsArray)
         form.style.display='none'
+        select.value=text.value
     }
 })
 // Fucntion for displaying the Elements To Screen
@@ -39,7 +43,7 @@ function loopthroughProject(array){
         option.setAttribute('value',`${element.title}`)
         option.innerText=element.title
         select.append(option)
-        option.setAttribute('id',select.length)
+        option.setAttribute('id',select.length-1)
     });   
 }
 // Looping Through Every Project And Showing It's Todos
@@ -68,7 +72,7 @@ function loopthroughTodolist(element){
     button.setAttribute('id','edit')
     button.innerText='Edit'
     button2.setAttribute('id','done')
-    button2.innerText='Done'
+    button2.innerText='Done?'
     button3.setAttribute('id','Xtodo')
     button3.innerText='X'
     div2.append(para,button,button2,button3)
@@ -76,20 +80,74 @@ function loopthroughTodolist(element){
     container.append(div)
     let length=document.getElementsByClassName('innerdiv').length-1
     div.setAttribute('id',length)
+    
+// Deciding The Background Of The Div
+    if (item.priority=='Normal'){
+        div.style.background='#a1cae2'
+    }else if (item.priority=='Important'){
+        div.style.background='#91091e'
+    }
 })
 }
 // Event Listener For Changing Done Statue And Priority
 // The Form For Adding A Todo , changing The Todos According To The Selected Option 
-let addtodo = document.getElementById('addtodo')
-addtodo.addEventListener('click',todoForm)
-// Removing A Todo
-container.addEventListener('click',(e)=>{
-    if (e.target.id=='Xtodo'){
+select.addEventListener('change',(e)=>{
+    MyObject.projectsArray.forEach(item=>{
+        if (item.title==select.value){
+            loopthroughTodolist(item.todo)
+        }
+    })
+})
+// Event Listener For Changing Editing And Removing Todo Lists And Creating A Todo And The TodoForm
+body.addEventListener('click',(e)=>{
     let innerDiv=e.target.parentElement.parentElement
+    if (e.target.id==='Xtodo'){
     e.target.parentElement.parentElement.parentElement.removeChild(innerDiv)
     MyObject.projectsArray.forEach(item=>{
-        item.todo.splice(innerDiv.id,1)
+        if (select.value==item.title){
+            item.todo.splice(innerDiv.id,1)
+        }
     })
+    }
+    else if (e.target.id==='addtodo'){
+        todoForm()
+    }
+    else if (e.target.id==='removeproject'){
+       
+        let option = document.getElementsByTagName('option')
+        for (let i =0 ;i<option.length ,i<MyObject.projectsArray.length;i++){
+            console.log(option[i].id)
+            console.log(MyObject.projectsArray[i].title)
+        }
+    }
+    else if (e.target.id=='done'){
+        let id = innerDiv.id
+        if (e.target.innerText==='Done?'){
+            MyObject.projectsArray.forEach(item=>{
+                item.todo[id].toggleDone()
+            })
+            innerDiv.style.background='#CDCDCD'
+            e.target.innerText='Done'
+            e.target.style.background='grey'
+        }else if (e.target.innerText==='Done'){
+            var check
+            MyObject.projectsArray.forEach(item=>{
+                item.todo[id].toggleDone()
+                check=item.todo[id].priority=='Important'?'#91091e':'#a1cae2'
+            })
+            e.target.innerText='Not Done'
+            e.target.style.background='#4a47a3'
+            innerDiv.style.background=check
+        }
+        else if (e.target.innerText==='Not Done'){
+            MyObject.projectsArray.forEach(item=>{
+                item.todo[id].toggleDone()
+                check=item.todo[id].priority=='Important'?'#91091e':'#a1cae2'
+            })
+            e.target.innerText='Done'
+            e.target.style.background='#CDCDCD'
+            innerDiv.style.background='#CDCDCD'
+        }
 }
 })
 // Displays The Todoform Responsible For Adding Todos
@@ -104,6 +162,7 @@ function todoForm(){
     label2.innerText='DATE'
     let input2=document.createElement('INPUT')
     input2.setAttribute('type','date')
+    input2.setAttribute('min',today)
     let label3 = document.createElement('LABEL')
     label3.innerText='Priority'
     let label4 = document.createElement('LABEL')
@@ -122,16 +181,16 @@ function todoForm(){
     selectPriority.append(option,option2)
     let innerdiv=document.createElement('DIV')
     let add=document.createElement("button")
-    add.innerText='Add'
+    add.innerText='Save'
+    add.setAttribute('id','save')
     add.addEventListener('click',(e)=>{
-            MyObject.projectsArray.forEach(item=>{
-            if (item.title==select.value){
-                item.todo.push(makeTodo(input.value,input2.value,description.value,'false',selectPriority.value))
-                console.log(selectPriority.value)
-                body.removeChild(div)
-                loopthroughTodolist(item.todo)
-                }
-            })
+        MyObject.projectsArray.forEach(item=>{
+        if (item.title==select.value){
+            item.todo.push(makeTodo(input.value,input2.value,description.value,false,selectPriority.value))
+            body.removeChild(div)
+            loopthroughTodolist(item.todo)
+            }
+        })
     })
     let cancel= document.createElement('button')
     cancel.innerText='Cancel'
