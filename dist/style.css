@@ -14,40 +14,31 @@ h1,h2,p,h3,span{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
-    display: flex;
     flex-direction: column;
-    background: #36486b;
+    background: #365085;
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-#main {
-    flex: 1;
-    background: #618685;
-    margin: auto auto;
-    width:min(80%,80%);
-    max-height: 60%;
-    margin-top: 150px;
 }
 .pdisplay {
     display: flex;
-    background: #9fd3dd;
+    background:  #35c6d7    ;
     height: auto;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 2rem;
     font-weight: bolder;
     color: yellow;
 }
 #addedit button {
-border-radius: 8%;
-background: #a7c5eb;
+border-radius: 2%;
 color: white;
 font-weight: bolder;
 margin: 0.5em;
 padding: 0.5rem 0.75rem;
+background: #35c6d7;
 }
 #addtodo {
     text-align: center;
-    background: darkcyan;
+    background: rgb(17, 216, 216);
     color: white;
     width: 100%;
     padding:0.75em 0;
@@ -60,50 +51,63 @@ text-align: center;
 min-width: 15ch;
 cursor: pointer;
 line-height: 1.1;
-background: #0c0546;
+background:  #0b4f574b;
 appearance: none;
 padding:0.3rem 0.5rem;
 margin-left: 0.7em;
 color: white;
+border:2px solid transparent;
+padding: 12px;
+border: none;
+font-size: 20.5px;
+box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+-webkit-appearance: button;
+appearance: button;
+outline: none;
+}
+.todoform select option{
+    padding: 13px;
 }
 #container {
-    margin-top: 70px;
+    margin-top: 100px;
     margin-inline: auto;
-    background: #8ac4d0;
-    width: 80%;
-    min-height: 80%;
+    width: 80vw;
+}
+#todolistHolder{
+    width: 100%;
 }
 .innerdiv {
-    position: relative;
-    display: flex;
-    flex-direction: row;
     padding: 0.75em;
-    align-items: center;
-    justify-content: space-between;
+    border-bottom:.5rem solid #0074D9 ;
+  
 }
 #namedate span {
     text-transform: uppercase;
     color: yellow;
     font-size: 23px;
     font-weight: bolder;
-    padding-right: 1em;
+    padding-right:0.5em;
 } 
-.innerdiv p {
-    width: 95%;
-    color: white;
-    font-size: 20px;
-    justify-self: end;
-}
 #paraeditdone{
-    display: flex;
+    flex-shrink: 1;
+    display:block;
     justify-content: space-between;
     align-items: center;
-    width: 65%;
+    width: 50%;
+    flex-wrap: wrap;
 }
 #paraeditdone > * {
     margin: 0.2em;
+    flex-shrink: 1;
 }
-#paraeditdone button {
+#paraeditdone p{
+  color: white;
+    font-size:1.7rem;
+    display: block;
+    overflow-wrap: break-word;
+    width:150%;
+}
+#paraeditdone button{
     height: 3em;
     background:#4a47a3;
     color: white;
@@ -176,6 +180,21 @@ border-radius: 15px;
     resize: none;
     width: 95%;
 }
+.todoform select{
+    background-color: #0563af;
+    color: white;
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+}
+.todoform select option{
+    padding: 30px;
+}
 .todoform label {
     color: chocolate ;
 }
@@ -213,3 +232,54 @@ border-radius: 15px;
     color: white;
     font-size: 2.4rem;
 }
+
+@media screen and (max-width: 500px){
+   #addedit {
+       display: flex;
+       flex-direction: column;
+       width: 100%;
+       padding: 0.5rem 0;
+       align-items: center;
+   }#addedit >*{
+       width: 95%;
+   }
+   #container {
+       width: 100%;
+   }
+   .todoform{
+       width: 80%;
+   }.todoform input{
+       width: 93%;
+   }.todoform textarea{
+       min-height: 6rem;
+       height: fit-content;
+   }
+   #paraeditdone p {
+       width: 88.75vw;
+       font-size: 1rem;
+       line-height: 1.4;
+   }
+   #namedate span{
+       font-size: 1.5rem;
+   }
+   .pdisplay select {
+       width: 100%;
+   }
+   .pdisplay label {
+       font-size: 1.6rem;
+   }
+   .paraText{
+       display: block;
+       position: fixed;
+       width: 100%;
+       margin: 0;
+       padding: 0;
+       text-align: center;
+       font-size: 1.9rem;
+   }
+   .form{
+       margin-top: 300px;
+       width: 90%;
+       min-height: fit-content;
+   }
+    }
