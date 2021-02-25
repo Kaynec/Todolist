@@ -244,7 +244,8 @@ border-radius: 15px;
        width: 95%;
    }
    #container {
-       width: 100%;
+       width: 97%;
+       margin: 0 auto;
    }
    .todoform{
        width: 80%;
