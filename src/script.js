@@ -6,23 +6,24 @@ function makeProject(title){
         let todo=[]
         return {title,todo}
 }
-function makeTodo(title,date,description,done,priority){
-    done=false
-    function toggleDone(){
-        if (done){
-            return done===false
-        }else if (done===false){
-            return done===true
+class makeTodo{
+    constructor(title,date,description,done,priority){
+        this.title=title
+        this.date=date
+        this.description=description
+        this.done=done
+        this.priority=priority
+    }
+    toggleDone(){
+        this.done=!this.done
+    }
+    togglePriority(){
+        if (this.priority==='Normal'){
+            this.priority==='Important'
+        }else if (this.priority==='Important'){
+            this.priority==='Normal'
         }
     }
-    function togglePriority(){
-        if (priority==='Normal'){
-            priority==='important'
-        }else if (priority=='important'){
-            priority==='Normal'
-        }
-    }
-    return {title,date,description,done,priority,togglePriority,toggleDone}
 }
 
 var MyObject = function() {

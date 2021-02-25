@@ -72,7 +72,12 @@ function loopthroughTodolist(element){
     button.setAttribute('id','edit')
     button.innerText='Edit'
     button2.setAttribute('id','done')
-    button2.innerText='Done?'
+    button2.innerText='Not Done Yet'
+    if (item.done===true){
+        innerDiv.style.background='#CDCDCD'
+        button2.innerText='Done'
+        button2.style.background='grey'
+    }
     button3.setAttribute('id','Xtodo')
     button3.innerText='X'
     div2.append(para,button,button2,button3)
@@ -80,7 +85,6 @@ function loopthroughTodolist(element){
     container.append(div)
     let length=document.getElementsByClassName('innerdiv').length-1
     div.setAttribute('id',length)
-    
 // Deciding The Background Of The Div
     if (item.priority=='Normal'){
         div.style.background='#a1cae2'
@@ -89,7 +93,6 @@ function loopthroughTodolist(element){
     }
 })
 }
-// Event Listener For Changing Done Statue And Priority
 // The Form For Adding A Todo , changing The Todos According To The Selected Option 
 select.addEventListener('change',(e)=>{
     MyObject.projectsArray.forEach(item=>{
@@ -109,45 +112,57 @@ body.addEventListener('click',(e)=>{
         }
     })
     }
-    else if (e.target.id==='addtodo'){
+    else if (e.target.id==='edit'){
+        changeTodoInformation(e)
+        MyObject.projectsArray.forEach(item=>{
+            console.log(item.todo)
+            loopthroughTodolist(item.todo)
+        })
+    }else if (e.target.id==='addtodo'){
         todoForm()
     }
-    else if (e.target.id==='removeproject'){
-       
-        let option = document.getElementsByTagName('option')
-        for (let i =0 ;i<option.length ,i<MyObject.projectsArray.length;i++){
-            console.log(option[i].id)
-            console.log(MyObject.projectsArray[i].title)
+    else if (e.target.id==='removeproject'){     
+    const p = document.createElement('P')
+    body.append(p)
+    let option = document.getElementsByTagName('option')
+     for (let i =0 ;i<option.length;i++){
+     MyObject.projectsArray.forEach(item=>{
+    if (item.title===option[i].value){
+    if (item.title==='default'){
+        p.innerText=`You Can't Remove The Default Project`
+        p.classList.toggle('paraText')
+        setTimeout(()=>{
+        p.innerText=''
+        },2000)
+    } else {
+        MyObject.projectsArray.splice(option[i].id,1)
+        loopthroughProject(MyObject.projectsArray)
+        p.innerText=`Succesfully Deleted The Project ${item.title}`
+        p.classList.add('paraText')
+        setTimeout(()=>{
+            p.innerText=''
+            },2000)
         }
     }
-    else if (e.target.id=='done'){
-        let id = innerDiv.id
-        if (e.target.innerText==='Done?'){
-            MyObject.projectsArray.forEach(item=>{
-                item.todo[id].toggleDone()
-            })
-            innerDiv.style.background='#CDCDCD'
-            e.target.innerText='Done'
-            e.target.style.background='grey'
-        }else if (e.target.innerText==='Done'){
-            var check
-            MyObject.projectsArray.forEach(item=>{
-                item.todo[id].toggleDone()
-                check=item.todo[id].priority=='Important'?'#91091e':'#a1cae2'
-            })
-            e.target.innerText='Not Done'
-            e.target.style.background='#4a47a3'
-            innerDiv.style.background=check
-        }
-        else if (e.target.innerText==='Not Done'){
-            MyObject.projectsArray.forEach(item=>{
-                item.todo[id].toggleDone()
-                check=item.todo[id].priority=='Important'?'#91091e':'#a1cae2'
-            })
-            e.target.innerText='Done'
-            e.target.style.background='#CDCDCD'
-            innerDiv.style.background='#CDCDCD'
-        }
+    })
+}
+}
+else if (e.target.id=='done'){
+let check=innerDiv.style.background==='#a1cae2'?'#a1cae2':'#91091e'
+let id = innerDiv.id
+    MyObject.projectsArray.forEach(item=>{
+    if(item.todo[id].done===false){
+        innerDiv.style.background='#CDCDCD'
+        e.target.innerText='Done'
+        e.target.style.background='grey'
+        item.todo[id].toggleDone()
+    }else if (item.todo[id].done===true){
+        e.target.innerText='Not Done Yet'
+        e.target.style.background='#4a47a3'
+        innerDiv.style.background=check
+        item.todo[id].toggleDone()
+    }
+    })
 }
 })
 // Displays The Todoform Responsible For Adding Todos
@@ -184,14 +199,14 @@ function todoForm(){
     add.innerText='Save'
     add.setAttribute('id','save')
     add.addEventListener('click',(e)=>{
-        MyObject.projectsArray.forEach(item=>{
-        if (item.title==select.value){
-            item.todo.push(makeTodo(input.value,input2.value,description.value,false,selectPriority.value))
-            body.removeChild(div)
-            loopthroughTodolist(item.todo)
-            }
-        })
+    MyObject.projectsArray.forEach(item=>{
+    if (item.title==select.value){
+        item.todo.push(new makeTodo(input.value,input2.value,description.value,false,selectPriority.value))
+        body.removeChild(div)
+        loopthroughTodolist(item.todo)
+        }
     })
+})
     let cancel= document.createElement('button')
     cancel.innerText='Cancel'
     innerdiv.append(add,cancel)
@@ -201,4 +216,57 @@ function todoForm(){
     div.append(label,input,label2,input2,label4,description,label5,selectPriority,innerdiv)
     body.append(div)
 }
+
+// function changeTodoInformation(e){
+//     let div = document.createElement('DIV')
+//     div.classList.add('todoform')
+//     let label = document.createElement("LABEL")
+//     label.innerText='Title'
+//     let input = document.createElement('INPUT')
+//     input.setAttribute('type','text')
+//     let label2= document.createElement('LABEL')
+//     label2.innerText='DATE'
+//     let input2=document.createElement('INPUT')
+//     input2.setAttribute('type','date')
+//     input2.setAttribute('min',today)
+//     let label3 = document.createElement('LABEL')
+//     label3.innerText='Priority'
+//     let label4 = document.createElement('LABEL')
+//     label4.innerText='Description'
+//     let description=document.createElement('TEXTAREA')
+//     description.setAttribute('maxlength','150')
+//     let label5=document.createElement("LABEL")
+//     label5.innerText='Priority'
+//     let selectPriority=document.createElement('SELECT')
+//     let option=document.createElement('OPTION')
+//     option.value='Normal'
+//     option.innerText='Normal'
+//     let option2=document.createElement('OPTION')
+//     option2.value='Important'
+//     option2.innerText='Important'
+//     selectPriority.append(option,option2)
+//     let innerdiv=document.createElement('DIV')
+//     let save=document.createElement("button")
+//     save.innerText='Save'
+//     save.setAttribute('id','save')
+//     // This Is Selecting The Innerdiv
+//     let id = e.target.parentElement.parentElement.id
+//     save.addEventListener('click',(e)=>{
+//     var check = selectPriority.selectedIndex==0?'Normal':'Important' 
+//     MyObject.projectsArray.forEach(item=>{
+//     item.todo[id].title=input.value
+//     item.todo[id].date=input2.value
+//     item.todo[id].description=description.value
+//     item.todo[id].priority=check
+//     body.removeChild(div)
+//     })
+//     })
+//     let cancel= document.createElement('button')
+//     cancel.addEventListener('click',e=>body.removeChild(div))
+//     cancel.innerText='Cancel'
+//     innerdiv.append(save,cancel)
+//     div.append(label,input,label2,input2,label4,description,label5,selectPriority,innerdiv)
+//     body.append(div)
+// }
+
 }();
