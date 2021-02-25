@@ -148,7 +148,6 @@ body.addEventListener('click',(e)=>{
 }
 }
 else if (e.target.id=='done'){
-let check=innerDiv.style.background==='#a1cae2'?'#a1cae2':'#91091e'
 let id = innerDiv.id
     MyObject.projectsArray.forEach(item=>{
     if(item.todo[id].done===false){
@@ -156,11 +155,14 @@ let id = innerDiv.id
         e.target.innerText='Done'
         e.target.style.background='grey'
         item.todo[id].toggleDone()
+        console.log(item.todo[id])
     }else if (item.todo[id].done===true){
         e.target.innerText='Not Done Yet'
         e.target.style.background='#4a47a3'
-        innerDiv.style.background=check
+        var color=item.todo[id].priority=='Important'?'#91091e':'#a1cae2'
+        innerDiv.style.background=color
         item.todo[id].toggleDone()
+        console.log(item.todo[id])
     }
     })
 }
