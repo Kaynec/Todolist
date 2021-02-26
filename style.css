@@ -251,7 +251,7 @@ border-radius: 10px;
        width: 95%;
    }
    #container {
-       width: 99%;
+       width: 97%;
        margin-inline:auto;
    }
    #todolistHolder{
@@ -278,6 +278,7 @@ border-radius: 10px;
    }
    .pdisplay label {
        font-size: 1.6rem;
+       margin-left:0.14em ;
    }
    .paraText{
        display: block;
