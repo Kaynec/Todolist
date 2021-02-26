@@ -155,20 +155,19 @@ background: rgb(1, 48, 43) ;
 }
 .todoform {
 flex-direction: column;
-padding: 0.5em;
-position: fixed;    margin-left: 3rem;
+position: fixed;
+width: 25%;
 top: 0;
 left: 0; 
-right: 0; 
-margin: 0 auto;
-width: 25vw;
-height: auto;
+right: 0;  
+margin: auto auto;
+min-height: 40vh;
 margin-top: 200px;
-background: lightblue;
+background: rgb(4, 65, 85);
 display: flex;
 flex-direction: column;
 align-items: center;
-border-radius: 15px;
+border-radius: 10px;
 }
 .todoform > *  {
     width: 30%;
@@ -181,7 +180,7 @@ border-radius: 15px;
     width: 95%;
 }
 .todoform select{
-    background-color: #0563af;
+    background-color: #125a96;
     color: white;
     padding: 12px;
     width: 250px;
@@ -232,6 +231,12 @@ border-radius: 15px;
     color: white;
     font-size: 2.4rem;
 }
+.paratext2{
+    color: white;
+    font-size: 1.5rem;
+    width: 100%;
+    padding: 1em;
+}
 
 @media screen and (max-width: 500px){
    #addedit {
@@ -245,7 +250,7 @@ border-radius: 15px;
    }
    #container {
        width: 97%;
-       margin: 0 auto;
+       margin-inline:auto;
    }
    .todoform{
        width: 80%;
@@ -273,10 +278,9 @@ border-radius: 15px;
        display: block;
        position: fixed;
        width: 100%;
-       margin: 0;
-       padding: 0;
        text-align: center;
-       font-size: 1.9rem;
+       font-size: 1.25rem;
+       margin: 20px auto;
    }
    .form{
        margin-top: 300px;
