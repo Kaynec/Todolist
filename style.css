@@ -14,8 +14,10 @@ h1,h2,p,h3,span{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
-    flex-direction: column;
-    background: #365085;
+height: 100vh;
+width: 100vw;
+flex-direction: column;
+background: #365085;
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .pdisplay {
@@ -249,13 +251,16 @@ border-radius: 10px;
        width: 95%;
    }
    #container {
-       width: 97%;
+       width: 99%;
        margin-inline:auto;
    }
+   #todolistHolder{
+       width: 100%;
+   }
    .todoform{
-       width: 80%;
+       width: 90%;
    }.todoform input{
-       width: 93%;
+       width: 50%;
    }.todoform textarea{
        min-height: 6rem;
        height: fit-content;
@@ -285,6 +290,12 @@ border-radius: 10px;
    .form{
        margin-top: 300px;
        width: 90%;
-       min-height: fit-content;
-   }
+
+    }.form button:first-child{
+        padding: 1em;
+        border-radius: 4%;
+        background: rgb(8, 57, 85);
+        border:2px solid transparent;
+        color:white;
+    }
     }
